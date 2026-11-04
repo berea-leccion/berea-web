@@ -1,0 +1,440 @@
+<title>Berea Adventista</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Nunito:wght@400;600;700&display=swap">
+<style>
+/* Layout: a sunrise page. Warm sky hero with an illustrated scene, then a live phone demo of the bot, then calm warm bands. */
+:root{
+  --bg:#fff7ec; --bg2:#ffeacb; --surface:#ffffff; --fg:#2a1b3d; --muted:#6b5877;
+  --sun:#f59e0b; --coral:#ef6a4c; --sky:#2b3a9f; --leaf:#2f8f6b; --line:#f0d9b5;
+  --on-sky:#fff8ea; --chat-bg:#e9f1fb; --bubble-bot:#ffffff; --bubble-me:#d7f0c2;
+  --display:"Fraunces", Georgia, "Times New Roman", serif;
+  --body:"Nunito", "Segoe UI", system-ui, sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1a1230; --bg2:#241a40; --surface:#2a2049; --fg:#fff1dc; --muted:#c7b6d8;
+  --sun:#ffb938; --coral:#ff8a6b; --sky:#8aa0ff; --leaf:#5ad1a0; --line:#3d3066;
+  --chat-bg:#1d2a44; --bubble-bot:#2c3a5a; --bubble-me:#2d6a4d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1a1230; --bg2:#241a40; --surface:#2a2049; --fg:#fff1dc; --muted:#c7b6d8;
+  --sun:#ffb938; --coral:#ff8a6b; --sky:#8aa0ff; --leaf:#5ad1a0; --line:#3d3066;
+  --chat-bg:#1d2a44; --bubble-bot:#2c3a5a; --bubble-me:#2d6a4d; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:18px/1.6 var(--body);margin:0}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.12;margin:0;text-wrap:balance}
+h2{font-size:clamp(1.8rem,4vw,2.6rem)}
+h3{font-size:1.25rem}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--coral);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.78rem;color:var(--coral)}
+.muted{color:var(--muted)}
+
+/* Hero */
+.sky{background:linear-gradient(90deg,rgba(24,12,40,.88) 0%,rgba(24,12,40,.62) 42%,rgba(24,12,40,.08) 78%),url(../img/village.jpg) center right/cover no-repeat,#3a2560;color:var(--on-sky);position:relative;overflow:hidden}
+.sky header .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:18px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-size:1.5rem;text-decoration:none}
+.brand small{display:block;font:600 .68rem var(--body);letter-spacing:.16em;text-transform:uppercase;opacity:.85}
+.langsw{display:flex;gap:4px;padding:4px;border-radius:999px;background:rgba(24,12,40,.55)}
+.langsw button{font:700 .85rem var(--body);padding:6px 12px;border-radius:999px;border:0;background:transparent;color:var(--on-sky);cursor:pointer}
+.langsw button[aria-pressed="true"]{background:#fff;color:#2b3a9f}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,38rem);gap:24px;padding-block:40px 80px}
+.hero .copy{display:flex;flex-direction:column;gap:20px}
+.hero h1{font-size:clamp(2.2rem,5.4vw,3.8rem)}
+.hero .lead{font-size:1.2rem;max-width:34em;opacity:.96}
+.hero .eyebrow{color:#ffe08a}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 24px;border-radius:999px;font:700 1.02rem var(--body);text-decoration:none;border:2px solid transparent;cursor:pointer}
+.btn.go{background:#fff;color:#c2411f;box-shadow:0 10px 24px -10px rgba(40,10,60,.55)}
+.btn.ghost{border-color:rgba(255,255,255,.7);color:var(--on-sky)}
+.scene{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 92%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 92%,transparent 100%);width:100%;height:auto;display:block;max-height:520px}
+.beta{font-size:.92rem;opacity:.95}
+
+/* Demo */
+.demo{background:var(--bg2)}
+.demo .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:center;padding-block:72px}
+.demo .copy{display:flex;flex-direction:column;gap:18px;min-width:0}
+.ticks{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
+.ticks li{display:flex;gap:12px;align-items:flex-start}
+.ticks i{flex:none;width:28px;height:28px;border-radius:50%;background:var(--sun);color:#3b1d00;display:grid;place-items:center;font-style:normal;font-weight:800;font-size:.9rem}
+.stage{display:flex;justify-content:center;min-width:0}
+.phone{width:320px;max-width:100%;background:#14122b;border-radius:38px;padding:12px;box-shadow:0 30px 60px -28px rgba(60,20,90,.7);border:1px solid rgba(255,255,255,.15)}
+.screen{background:var(--chat-bg);border-radius:28px;height:560px;display:flex;flex-direction:column;overflow:hidden}
+.bar{background:#2b3a9f;color:#fff;padding:12px 14px;display:flex;align-items:center;gap:10px}
+.bar .av{width:34px;height:34px;border-radius:50%;background:linear-gradient(160deg,#ffcf86,#ef6a4c);display:grid;place-items:center;font-family:var(--display);font-weight:700;color:#2b1a40}
+.bar b{display:block;font-size:.95rem;line-height:1.1}
+.bar span{font-size:.72rem;opacity:.8}
+.feed{flex:1;overflow:hidden;padding:12px 10px;display:flex;flex-direction:column;gap:8px;justify-content:flex-end}
+.msg{max-width:88%;padding:9px 12px;border-radius:16px;font-size:.84rem;line-height:1.42;animation:pop .35s ease both;color:var(--fg)}
+.msg.bot{background:var(--bubble-bot);border-bottom-left-radius:4px;align-self:flex-start}
+.msg.me{background:var(--bubble-me);border-bottom-right-radius:4px;align-self:flex-end}
+.msg p+p{margin-top:6px}
+.msg .src{font-size:.72rem;color:var(--muted);display:block;margin-top:6px}
+.typing{display:flex;gap:4px;padding:12px 14px}
+.typing i{width:7px;height:7px;border-radius:50%;background:var(--muted);animation:b 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+.keys{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:8px 10px 12px;background:var(--chat-bg)}
+.key:nth-child(3){grid-column:1/-1}
+.key{background:var(--surface);border:1px solid var(--line);color:var(--fg);padding:9px 8px;border-radius:10px;text-align:center;font:700 .8rem var(--body);transition:.2s}
+.key.hit{background:var(--sun);color:#3b1d00;transform:scale(.97)}
+.replay{margin-top:10px;font:700 .9rem var(--body);background:transparent;color:var(--fg);border:2px solid var(--coral);border-radius:999px;padding:8px 18px;cursor:pointer;align-self:flex-start}
+.rbtns{display:flex;gap:10px;flex-wrap:wrap}.replay.listen{background:var(--coral);color:#fff;border-color:var(--coral)}
+.note{font-size:.82rem;color:var(--muted)}
+@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes b{0%,80%,100%{opacity:.3;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
+
+/* Bands */
+.band .wrap{padding-block:72px;display:flex;flex-direction:column;gap:32px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.step{background:var(--surface);border-radius:28px;padding:28px;display:flex;flex-direction:column;gap:12px;border:1px solid var(--line);min-width:0}
+.step .ico{width:64px;height:64px}
+.step p{color:var(--muted)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.two > *{min-width:0}
+.kneel{width:100%;max-width:460px;height:auto;justify-self:center;border-radius:28px;box-shadow:0 30px 60px -30px rgba(80,30,0,.6);display:block}
+.checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.checks li{padding-left:34px;position:relative}
+.checks li::before{content:"✓";position:absolute;left:0;top:0;width:24px;height:24px;border-radius:50%;background:var(--leaf);color:#fff;font-weight:800;font-size:.8rem;display:grid;place-items:center}
+.checks b{font-weight:800}
+.warm{background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%)}
+.road{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.road div{border-radius:22px;padding:22px;background:var(--surface);border:1px solid var(--line);display:flex;flex-direction:column;gap:6px}
+.road .when{font-weight:800;color:var(--coral);letter-spacing:.08em;text-transform:uppercase;font-size:.8rem}
+.join{display:grid;grid-template-columns:200px 1fr auto;gap:32px;align-items:center;background:linear-gradient(135deg,#2b3a9f,#c2411f);color:#fff8ea;border-radius:32px;padding:36px}
+.join .pray{width:100%;height:100%;min-height:220px;object-fit:cover;object-position:50% 25%;border-radius:20px;display:block}
+.join .qr{background:#fff;padding:10px;border-radius:18px;width:170px;height:170px}
+.join .qr img{width:100%;height:100%;display:block}
+.join .btn.go{align-self:flex-start}
+.join > div{display:flex;flex-direction:column;gap:14px;min-width:0}
+.faq details{border-bottom:1px solid var(--line);padding-block:14px}
+.faq summary{cursor:pointer;font-weight:800;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";float:right;color:var(--coral)}
+.faq details[open] summary::after{content:"–"}
+.faq p{color:var(--muted);margin-top:8px}
+footer{background:var(--bg2)}
+footer .wrap{padding-block:28px;font-size:.88rem;color:var(--muted);display:flex;flex-direction:column;gap:6px}
+
+.bere{background:#24130a}
+.bfig{margin:0;position:relative;max-width:1400px;margin-inline:auto}
+.bfig img{display:block;width:100%;height:auto}
+.bfig figcaption{position:absolute;inset:0;display:flex;align-items:center;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));background:linear-gradient(90deg,rgba(25,12,4,.82) 0%,rgba(25,12,4,.55) 34%,rgba(25,12,4,0) 55%);color:#fff3dc}
+.bfig figcaption>div{max-width:min(26em,29%);margin-left:clamp(16px,5vw,70px);display:flex;flex-direction:column;gap:14px}
+.bfig .eyebrow{color:#ffd36e}
+.bfig h2{font-size:clamp(1.4rem,2.6vw,2.2rem)}.bfig figcaption p:last-child{font-size:clamp(.88rem,1.2vw,1.05rem);line-height:1.5}
+@media (max-width:860px){
+  .join .pray{min-height:0;height:220px}.bfig figcaption{position:static;background:#24130a;padding-block:28px}.bfig figcaption>div{max-width:none;margin-left:0}}
+.easy{position:relative;display:flex;align-items:center;min-height:clamp(560px,52vw,720px);background:linear-gradient(90deg,rgba(30,14,4,.92) 0%,rgba(30,14,4,.72) 34%,rgba(30,14,4,0) 62%),url(../img/abuela.jpg) 72% center/cover no-repeat,#1e0e04;color:#fff3dc}
+.easy-in{width:100%;max-width:1080px;margin:0 auto;padding-block:56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:18px;align-items:flex-start}
+.easy-in>*{max-width:min(30rem,100%)}
+.easy .eyebrow{color:#ffd36e}
+.easy h2{font-size:clamp(2rem,4.6vw,3.4rem)}
+.easy p:not(.eyebrow){font-size:1.15rem}
+.easy .btn.go{margin-top:6px}
+@media (max-width:860px){.easy{align-items:flex-end;min-height:680px;background:linear-gradient(180deg,rgba(30,14,4,0) 18%,rgba(30,14,4,.78) 52%,rgba(30,14,4,.95) 100%),url(../img/abuela.jpg) 68% 20%/cover no-repeat,#3a2410}.easy-in{padding-block:32px}}
+.faith{display:flex;align-items:center;min-height:clamp(560px,50vw,680px);background:linear-gradient(90deg,rgba(24,12,4,.9) 0%,rgba(24,12,4,.72) 38%,rgba(24,12,4,.05) 72%),url(../img/rollo.jpg) 60% center/cover no-repeat,#24130a;color:#fff3dc}
+.faith-in{width:100%;max-width:1080px;margin:0 auto;padding-block:56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:20px}
+.faith-in>*{max-width:min(31rem,100%)}
+.faith .eyebrow{color:#ffd36e}
+.faith h2{font-size:clamp(1.9rem,4vw,3rem)}
+.faith .checks li::before{background:#ffd36e;color:#3b1d00}
+@media (max-width:860px){.faith{align-items:flex-end;min-height:720px;background:linear-gradient(180deg,rgba(24,12,4,.05) 6%,rgba(24,12,4,.82) 45%,rgba(24,12,4,.96) 100%),url(../img/rollo.jpg) 55% 0/auto 55% no-repeat,#24130a}.faith-in{padding-block:28px}}
+.close{display:flex;align-items:center;min-height:clamp(560px,50vw,680px);background:linear-gradient(90deg,rgba(30,14,4,0) 0%,rgba(30,14,4,0) 16%,#1e0e04 40%),url(../img/oracion.jpg) left center/auto 100% no-repeat,#1e0e04;color:#fff3dc}
+.close-in{width:100%;max-width:1080px;margin:0 auto;padding-block:56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;justify-content:flex-end}
+.close-box{max-width:30rem;display:flex;flex-direction:column;gap:18px}
+.close h2{font-size:clamp(2rem,4.4vw,3.2rem)}
+.close p{font-size:1.15rem}
+.close-row{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.close .qr{background:#fff;padding:8px;border-radius:16px;width:132px;height:132px}
+.close .qr img{width:100%;height:100%;display:block}
+@media (max-width:860px){.close{align-items:flex-end;min-height:860px;background:linear-gradient(180deg,rgba(30,14,4,0) 20%,rgba(30,14,4,.88) 52%,#1e0e04 100%),url(../img/oracion.jpg) 50% 0/100% auto no-repeat,#1e0e04}.close-in{padding-block:28px}}
+.busy{background:var(--bg)}
+.busy-in{max-width:1080px;margin:0 auto;padding:72px max(16px,env(safe-area-inset-left,0px));display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.busy-l{display:flex;flex-direction:column;gap:16px;min-width:0}
+.busy h2{font-size:clamp(1.9rem,4.2vw,3rem)}
+.busy-r{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px}
+.busy-r li{display:flex;flex-direction:column;gap:4px;padding:20px 22px;border-radius:22px;background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--sun);min-width:0}
+.busy-r b{font:700 1.25rem var(--display)}
+.busy-r span{color:var(--muted)}
+@media (max-width:860px){.busy-in{grid-template-columns:1fr;padding-block:48px;gap:28px}}
+.teach{background:linear-gradient(135deg,#232f86 0%,#4a3a9a 55%,#b4452c 100%);color:#fff8ea}
+.teach-in{max-width:1080px;margin:0 auto;padding:72px max(16px,env(safe-area-inset-left,0px));display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.teach-l{display:flex;flex-direction:column;gap:18px;align-items:flex-start;min-width:0}
+.teach .eyebrow{color:#ffd36e}
+.teach h2{font-size:clamp(1.9rem,4vw,2.9rem)}
+.teach-r{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.teach-r li{display:flex;flex-direction:column;gap:6px;padding:18px;border-radius:20px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);min-width:0}
+.teach-r b{font:700 1.08rem var(--display)}
+.teach-r li>span{font-size:.95rem;opacity:.92}
+.teach-r em{font:700 .66rem var(--body);letter-spacing:.08em;text-transform:uppercase;background:#ffd36e;color:#3b1d00;border-radius:999px;padding:2px 8px;vertical-align:2px;font-style:normal;white-space:nowrap}
+@media (max-width:860px){.teach-in{grid-template-columns:1fr;padding-block:48px;gap:28px}.teach-r{grid-template-columns:1fr}}
+/* Recording mode */
+.rec header,.rec section:not(.demo),.rec footer,.rec .demo .copy{display:none}
+.rec .demo .wrap{grid-template-columns:1fr;padding-block:24px}
+.rec .demo{min-height:100vh;display:grid;place-items:center}
+.rec .phone{width:420px}.rec .screen{height:760px}.rec .msg{font-size:1.05rem}.rec .key{font-size:1rem}
+.rec .replay,.rec .note{display:none}
+.caption{display:none}
+.rec .caption{display:block;text-align:center;font:700 1.5rem var(--display);padding-top:20px}
+
+@media (max-width:860px){
+  .join .pray{min-height:0;height:220px}
+  .hero .wrap,.demo .wrap,.two,.join{grid-template-columns:1fr}
+  .sky{background:linear-gradient(180deg,rgba(24,12,40,.9) 0%,rgba(24,12,40,.72) 55%,rgba(24,12,40,.35) 100%),url(../img/village.jpg) 70% center/cover no-repeat,#3a2560}
+  .hero .wrap{padding-block:24px 48px}
+  .steps,.road{grid-template-columns:1fr}
+  .demo .wrap,.band .wrap{padding-block:48px}
+  .join .qr{justify-self:center}
+}
+@media (prefers-reduced-motion:reduce){.msg,.typing i{animation:none}}
+</style>
+
+<div class="sky">
+<header><div class="wrap">
+  <a class="brand" href="#top" aria-label="Berea">
+    <svg width="38" height="38" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="#fff" opacity=".18"/><path d="M6 13c5-2 9-2 14 1v17c-5-3-9-3-14-1z" fill="#fff"/><path d="M34 13c-5-2-9-2-14 1v17c5-3 9-3 14-1z" fill="#ffd36e"/><circle cx="20" cy="9" r="3.4" fill="#ffd36e"/></svg>
+    <span>Berea<small data-t="tag">Adventista</small></span>
+  </a>
+  <div class="langsw" role="group" aria-label="Sprache · Language · Idioma">
+    <button type="button" data-set="de" aria-pressed="false">DE</button>
+    <button type="button" data-set="en" aria-pressed="false">EN</button>
+    <button type="button" data-set="es" aria-pressed="false">ES</button>
+  </div>
+</div></header>
+<section class="hero" id="top"><div class="wrap">
+  <div class="copy">
+    <p class="eyebrow" data-t="eyebrow"></p>
+    <h1 data-t="h1"></h1>
+    <p class="lead" data-t="lead"></p>
+    <div class="btns">
+      <a class="btn go" href="https://t.me/berea_leccion_bot" target="_blank" rel="noopener" data-t="cta"></a>
+      <a class="btn ghost" href="#demo" data-t="cta2"></a>
+    </div>
+    <p class="beta" data-t="beta"></p>
+  </div>
+</div></section>
+</div>
+
+<section class="busy">
+  <div class="busy-in">
+    <div class="busy-l"><p class="eyebrow" data-t="busyEye"></p><h2 data-t="busyH"></h2><p class="muted" data-t="busyP"></p></div>
+    <ul class="busy-r">
+      <li><b data-t="bz1h"></b><span data-t="bz1p"></span></li>
+      <li><b data-t="bz2h"></b><span data-t="bz2p"></span></li>
+      <li><b data-t="bz3h"></b><span data-t="bz3p"></span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="demo" id="demo"><div class="wrap">
+  <div class="copy">
+    <p class="eyebrow" data-t="demoEye"></p>
+    <h2 data-t="demoH"></h2>
+    <p class="muted" data-t="demoP"></p>
+    <ul class="ticks">
+      <li><i>1</i><span data-t="t1"></span></li>
+      <li><i>2</i><span data-t="t2"></span></li>
+      <li><i>3</i><span data-t="t3"></span></li>
+    </ul>
+    <div class="rbtns"><button class="replay listen" type="button" id="listen" data-t="listen"></button><button class="replay" type="button" id="replay" data-t="replay"></button></div>
+    <p class="note" data-t="demoNote"></p>
+  </div>
+  <div class="stage">
+    <div>
+      <div class="phone"><div class="screen">
+        <div class="bar"><div class="av">B</div><div><b>Berea</b><span data-t="online"></span></div></div>
+        <div class="feed" id="feed" aria-live="polite"></div>
+        <div class="keys"><div class="key" id="k1"></div><div class="key" id="k2"></div><div class="key" id="k3"></div><div class="key" id="k4"></div><div class="key" id="k5"></div></div>
+      </div></div>
+      <div class="caption" id="cap"></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="bere">
+  <figure class="bfig">
+    <img src="../img/bereans.jpg" alt="Un grupo de creyentes de Berea estudiando un rollo juntos bajo la luz de una ventana" width="1600" height="900" loading="lazy">
+    <figcaption><div><p class="eyebrow" data-t="bereEye"></p><h2 data-t="bereH"></h2><p data-t="bereP"></p></div></figcaption>
+  </figure>
+</section>
+
+<section class="band"><div class="wrap">
+  <div><p class="eyebrow" data-t="howEye"></p><h2 data-t="howH"></h2></div>
+  <div class="steps">
+    <div class="step"><svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#ffe3b0"/><rect x="21" y="10" width="22" height="44" rx="5" fill="#2b3a9f"/><rect x="24" y="16" width="16" height="30" rx="2" fill="#fff"/><circle cx="32" cy="50" r="2" fill="#fff"/><path d="M27 24h10M27 30h10M27 36h6" stroke="#ef6a4c" stroke-width="2.4" stroke-linecap="round"/></svg><h3 data-t="s1h"></h3><p data-t="s1p"></p></div>
+    <div class="step"><svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#ffd5c8"/><path d="M10 22c8-3 15-3 22 2v26c-7-5-14-5-22-2z" fill="#ef6a4c"/><path d="M54 22c-8-3-15-3-22 2v26c7-5 14-5 22-2z" fill="#f59e0b"/><circle cx="32" cy="14" r="5" fill="#ffd36e"/></svg><h3 data-t="s2h"></h3><p data-t="s2p"></p></div>
+    <div class="step"><svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#cdeedd"/><path d="M12 16h32a6 6 0 0 1 6 6v14a6 6 0 0 1-6 6H28l-10 8v-8h-6a6 6 0 0 1-6-6V22a6 6 0 0 1 6-6z" transform="translate(2 0)" fill="#2f8f6b"/><path d="M22 28h20M22 35h12" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg><h3 data-t="s3h"></h3><p data-t="s3p"></p></div>
+  </div>
+</div></section>
+
+<section class="teach">
+  <div class="teach-in">
+    <div class="teach-l"><p class="eyebrow" data-t="teachEye"></p><h2 data-t="teachH"></h2><p data-t="teachP"></p><a class="btn go" href="https://t.me/berea_leccion_bot" target="_blank" rel="noopener" data-t="cta"></a></div>
+    <ul class="teach-r">
+      <li><b data-t="th1h"></b><span data-t="th1p"></span></li>
+      <li><b data-t="th2h"></b><span data-t="th2p"></span></li>
+      <li><b data-t="th3h"></b><span data-t="th3p"></span></li>
+      <li><b><span data-t="th4h"></span> <em data-t="teachSoon"></em></b><span data-t="th4p"></span></li>
+      <li><b><span data-t="th5h"></span> <em data-t="teachSoon"></em></b><span data-t="th5p"></span></li>
+      <li><b><span data-t="th6h"></span> <em data-t="teachSoon"></em></b><span data-t="th6p"></span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="faith">
+  <div class="faith-in">
+    <p class="eyebrow" data-t="faithEye"></p>
+    <h2 data-t="faithH"></h2>
+    <ul class="checks">
+      <li data-t="c1"></li><li data-t="c2"></li><li data-t="c3"></li><li data-t="c4"></li>
+    </ul>
+  </div>
+</section>
+
+<section class="band"><div class="wrap">
+  <div><p class="eyebrow" data-t="roadEye"></p><h2 data-t="roadH"></h2></div>
+  <div class="road">
+    <div><span class="when" data-t="r1w"></span><h3 data-t="r1h"></h3><p class="muted" data-t="r1p"></p></div>
+    <div><span class="when" data-t="r2w"></span><h3 data-t="r2h"></h3><p class="muted" data-t="r2p"></p></div>
+    <div><span class="when" data-t="r3w"></span><h3 data-t="r3h"></h3><p class="muted" data-t="r3p"></p></div>
+  </div>
+</div></section>
+
+<section class="easy">
+  <div class="easy-in">
+    <p class="eyebrow" data-t="easyEye"></p>
+    <h2 data-t="easyH"></h2>
+    <p data-t="easyP"></p>
+    <a class="btn go" href="https://t.me/berea_leccion_bot" target="_blank" rel="noopener" data-t="cta"></a>
+  </div>
+</section>
+
+<section class="band"><div class="wrap" style="padding-top:0">
+  <h2 data-t="faqH"></h2>
+  <div class="faq">
+    <details><summary data-t="q1"></summary><p data-t="a1"></p></details>
+    <details><summary data-t="q2"></summary><p data-t="a2"></p></details>
+    <details><summary data-t="q3"></summary><p data-t="a3"></p></details>
+    <details><summary data-t="q4"></summary><p data-t="a4"></p></details>
+  </div>
+</div></section>
+
+<section class="close">
+  <div class="close-in">
+    <div class="close-box">
+      <h2 data-t="joinH"></h2>
+      <p data-t="joinP"></p>
+      <div class="close-row">
+        <a class="btn go" href="https://t.me/berea_leccion_bot" target="_blank" rel="noopener" data-t="cta"></a>
+        <div class="qr"><img alt="QR @berea_leccion_bot" src="data:image/png;base64,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"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <p data-t="disc"></p>
+  <p><a href="../privacy.html" data-t="privL"></a> · <a href="../terms.html" data-t="termsL"></a></p>
+  <p>© 2026 Berea · berea.leccion@gmail.com</p>
+</div></footer>
+
+<script>
+(function(){
+var T={
+es:{th5h:"Himno sugerido del día",th5p:"El himno del himnario que va con el tema de la lección.",th6h:"Enviar a tu clase",th6p:"Manda el resumen y las preguntas a tu grupo con un toque.", teachEye:"Para maestros de Escuela Sabática",teachH:"Llega a tu clase con la lección ya preparada.",teachP:"Berea prepara la lección por ti: la resume, la explica y te da preguntas para dirigir la discusión. Tú sigues siendo el maestro; Berea te ahorra las horas de preparación.",th1h:"Resumen de la lección",th1p:"Lo esencial del tema, en palabras sencillas.",th2h:"Preguntas para tu clase",th2p:"Para abrir la conversación y animar a participar.",th3h:"Explicación de los textos",th3p:"Qué dice el pasaje y cómo se relaciona con la lección.",th4h:"Plan de clase completo",th4p:"Apertura, discusión, aplicación y oración, en 30 o 45 minutos.",teachSoon:"Pronto", busyEye:"Sabemos que andas ocupado",busyH:"No tienes tiempo de leer toda la lección cada día. Berea sí lo tiene.",busyP:"Berea es un asistente de inteligencia artificial que hace de maestro paciente en tu celular: lee la lección por ti y te la cuenta con palabras sencillas. No reemplaza la lección completa ni a tu pastor, te ayuda a llegar a ella.",bz1h:"Te la explica",bz1p:"El tema del día en lenguaje sencillo, con el versículo y su referencia.",bz2h:"Te la resume",bz2p:"En un minuto sabes de qué trata, aunque hoy no hayas podido leerla.",bz3h:"Te prepara las preguntas",bz3p:"Para pensar durante el día o para llevar a tu clase de Escuela Sabática.", privL:"Política de privacidad",termsL:"Términos de uso",easyEye:"Jeremías 6:16 · Las sendas antiguas",easyH:"La Biblia de siempre, en tu celular de hoy.",easyP:"Las mismas sendas antiguas, con una herramienta de hoy. Si sabes enviar un mensaje, sabes usar Berea: un botón te lleva al resumen y otro a las preguntas.",listen:"🔊 Escuchar con voz",bereEye:"Hechos 17:11",bereH:"Los de Berea estudiaban cada día.",bereP:"Cuando Pablo les predicó, no aceptaron todo sin más: escudriñaron cada día las Escrituras para comprobarlo. De ellos viene el nombre de Berea.",tag:"Adventista",eyebrow:"Para iglesias adventistas",h1:"Toda la lección de Escuela Sabática, en un solo botón.",lead:"Berea explica la lección con palabras sencillas, resume el día y prepara preguntas para tu clase. Y respondes dudas sobre toda la Biblia, las 28 Creencias y Elena G. de White. Abres Telegram, tocas un botón y listo.",cta:"Probar Berea en Telegram",cta2:"Ver cómo funciona",beta:"Beta gratuita desde diciembre. Gratis también en enero.",
+demoEye:"Así funciona",demoH:"Una conversación, botones para todo, todas tus preguntas.",demoP:"Esta es una demostración animada con respuestas como las que da Berea.",t1:"Toca «Resumen de la lección» y entiende el tema del día en un minuto.",t2:"Toca «Preguntas para mi clase» y llega preparado a la Escuela Sabática. Si enseñas, toca «Preparar mi clase»: resumen, textos y preguntas, listos.",t3:"Pregunta sobre la lección y también sobre toda la Biblia, las 28 Creencias Fundamentales y los escritos de Elena G. de White, con referencias.",replay:"Ver otra vez",demoNote:"Demostración ilustrativa, no es una grabación en vivo.",online:"asistente de la lección",
+k1:"Resumen de la lección",k2:"Preguntas para mi clase",k3:"Preparar mi clase",b4:"<p>🧑‍🏫 <b>Tu clase, lista</b></p><p><b>Idea central:</b> Dios usó personas distintas para dejarnos su Palabra por escrito.</p><p><b>Textos clave:</b> Éxodo 17:14 · Jeremías 36:2</p><p><b>Para la clase:</b> ¿Qué cambia en ti saber que Dios quiso que su mensaje quedara escrito?</p><p><b>Aplicar:</b> Lee un pasaje cada día esta semana.</p>",k4:"Plan de clase 30 min · Pronto",b5:"<p>⏱ <b>Plan de 30 minutos</b></p><p>Apertura y oración · 3 min</p><p>Repaso del tema · 7 min</p><p>Discusión · 12 min</p><p>Aplicación · 5 min</p><p>Cierre y oración · 3 min</p>",k5:"Himno del día · Pronto",b6:"<p>🎵 <b>Himno sugerido del día</b></p><p>Pronto Berea te dirá qué himno del himnario va con el tema de hoy.</p>",
+u0:"Hola",b0:"¡Hola! Soy Berea 🌅 Hoy estudiamos «Los escritos proféticos». ¿Qué quieres hacer?",
+b1:"<p>📖 <b>Resumen</b></p><p>Dios usó a personas muy distintas para dejarnos su mensaje. Los escritos proféticos nos dan consuelo y esperanza.</p><span class='src'>Romanos 15:4</span>",
+b2:"<p>❓ <b>Preguntas para tu clase</b></p><p>1. ¿Qué promesa escrita te ha dado esperanza?</p><p>2. ¿Por qué estudiar la Biblia cada día?</p><p>3. ¿Cómo compartes esa esperanza?</p>",
+u3:"¿Qué es el don de profecía?",b3:"<p>Es uno de los dones del Espíritu para guiar y edificar a la iglesia. La Biblia es la norma que prueba toda enseñanza.</p><span class='src'>Creencia fundamental 18 · Joel 2:28</span>",
+howEye:"Cómo funciona",howH:"Sencillo para toda la iglesia.",s1h:"Abre Telegram",s1p:"Instala Telegram (gratis). Luego escanea el código QR con la cámara o busca @berea_leccion_bot.",s2h:"Estudia con Berea",s2p:"Resumen del día, versículo y explicación sencilla, siempre ligada a la lección del trimestre.",s3h:"Pregunta lo que quieras",s3p:"Prepara las preguntas de tu clase y pregunta lo que quieras de la Biblia, las 28 Creencias y Elena G. de White. Disponible en español, polaco e inglés; alemán pronto.",
+faithEye:"Fiel a la Biblia",faithH:"Para estudiar con oración y con la Biblia en la mano.",c1:"<b>Basada en la Biblia</b> y en las 28 Creencias Fundamentales.",c2:"<b>Con referencias</b> para que cada uno compruebe, como los de Berea.",c3:"<b>Sin citas inventadas.</b> Si no está seguro, lo dice y te lleva a la lección.",c4:"<b>Sabe cuándo callar.</b> En temas personales recomienda hablar con el pastor o los ancianos.",
+roadEye:"Lo que viene",roadH:"Crecemos con las iglesias.",r1w:"Diciembre 2026",r1h:"Beta gratuita",r1p:"Un grupo pequeño prueba Berea y nos ayuda a mejorarla.",r2w:"Enero 2027",r2h:"Prueba gratuita",r2p:"Todas las iglesias interesadas, con el nuevo trimestre.",r3w:"Febrero 2027",r3h:"Planes por iglesia",r3p:"Precios sencillos para cada congregación. Los anunciaremos con tiempo.",
+joinH:"Pruébala hoy en Telegram.",joinP:"Escanea el código o toca el botón. Escríbele «Hola» y elige un botón.",
+faqH:"Preguntas frecuentes",q1:"¿Es un servicio oficial de la Iglesia Adventista?",a1:"No. Berea es un proyecto independiente creado por miembros de iglesia para animar al estudio diario de la Biblia.",q2:"¿Reemplaza la lección de Escuela Sabática?",a2:"No. La acompaña. Siempre te lleva a estudiar la lección completa.",q3:"¿Necesito instalar algo?",a3:"Sí, necesitas instalar Telegram, gratis en tu celular. Luego escanea el código QR de esta página con la cámara (o toca el botón), se abre el chat con Berea y tocas un botón.",q4:"¿Cuánto cuesta?",a4:"La beta y el mes de enero son gratis. Los precios se anunciarán antes de febrero.",
+disc:"Berea es un proyecto independiente y no es un servicio oficial de la Iglesia Adventista del Séptimo Día."},
+pl:{th5h:"Proponowana pieśń dnia",th5p:"Pieśń ze śpiewnika pasująca do tematu lekcji.",th6h:"Wyślij do swojej klasy",th6p:"Wyślij streszczenie i pytania do grupy jednym dotknięciem.", teachEye:"Dla nauczycieli szkółki sobotniej",teachH:"Przyjdź na zajęcia z gotową lekcją.",teachP:"Berea przygotowuje lekcję za Ciebie: streszcza ją, wyjaśnia i podaje pytania do prowadzenia dyskusji. Ty nadal jesteś nauczycielem; Berea oszczędza Ci godziny przygotowania.",th1h:"Streszczenie lekcji",th1p:"Najważniejsze z tematu, prostymi słowami.",th2h:"Pytania do Twojej klasy",th2p:"Na otwarcie rozmowy i zachęcenie do udziału.",th3h:"Wyjaśnienie tekstów",th3p:"Co mówi fragment i jak łączy się z lekcją.",th4h:"Pełny plan zajęć",th4p:"Wstęp, dyskusja, zastosowanie i modlitwa, w 30 lub 45 minut.",teachSoon:"Wkrótce", busyEye:"Wiemy, że jesteś zajęty",busyH:"Nie masz czasu czytać całej lekcji każdego dnia. Berea ma.",busyP:"Berea to asystent oparty na sztucznej inteligencji, który jak cierpliwy nauczyciel w Twoim telefonie czyta lekcję za Ciebie i opowiada ją prostymi słowami. Nie zastępuje pełnej lekcji ani Twojego pastora, pomaga do niej dotrzeć.",bz1h:"Wyjaśnia ją",bz1p:"Temat dnia prostym językiem, z wersetem i odnośnikiem.",bz2h:"Streszcza ją",bz2p:"W minutę wiesz, o czym jest, nawet jeśli dziś nie zdążyłeś jej przeczytać.",bz3h:"Przygotowuje pytania",bz3p:"Do przemyślenia w ciągu dnia albo do Twojej klasy szkółki sobotniej.", privL:"Polityka prywatności",termsL:"Regulamin",easyEye:"Jeremiasza 6,16 · Dawne ścieżki",easyH:"Ta sama Biblia, w dzisiejszym telefonie.",easyP:"Dawne ścieżki, nowe narzędzie. Jeśli umiesz wysłać wiadomość, umiesz korzystać z Berea: jeden przycisk prowadzi do podsumowania, drugi do pytań.",listen:"🔊 Posłuchaj z lektorem",bereEye:"Dzieje Apostolskie 17,11",bereH:"Mieszkańcy Berei studiowali codziennie.",bereP:"Gdy Paweł do nich przemawiał, nie przyjęli wszystkiego bez namysłu: codziennie badali Pisma, by to sprawdzić. Stąd pochodzi nazwa Berea.",tag:"Adwentystyczna",eyebrow:"Dla zborów adwentystycznych",h1:"Cała lekcja szkółki sobotniej, w jednym przycisku.",lead:"Berea wyjaśnia lekcję prostymi słowami, streszcza dzień i przygotowuje pytania do Twojej klasy. Odpowiada też na pytania o całą Biblię, 28 zasad wiary i Ellen G. White. Otwierasz Telegram, dotykasz przycisku i gotowe.",cta:"Wypróbuj Berea w Telegramie",cta2:"Zobacz, jak działa",beta:"Darmowa beta od grudnia. W styczniu też za darmo.",
+demoEye:"Tak to działa",demoH:"Jedna rozmowa, przyciski na wszystko, wszystkie pytania.",demoP:"To animowana demonstracja z odpowiedziami takimi, jakie daje Berea.",t1:"Dotknij „Podsumowanie lekcji” i zrozum temat dnia w minutę.",t2:"Dotknij „Pytania do mojej klasy” i przyjdź przygotowany na szkółkę sobotnią. Uczysz? Dotknij „Przygotuj moją lekcję”: streszczenie, teksty i pytania gotowe.",t3:"Pytaj o lekcję, a także o całą Biblię, 28 zasad wiary i pisma Ellen G. White, z odnośnikami.",replay:"Zobacz jeszcze raz",demoNote:"Demonstracja poglądowa, nie nagranie na żywo.",online:"asystent lekcji",
+k1:"Podsumowanie lekcji",k2:"Pytania do mojej klasy",k3:"Przygotuj moją lekcję",b4:"<p>🧑‍🏫 <b>Twoja klasa gotowa</b></p><p><b>Główna myśl:</b> Bóg użył różnych ludzi, by zostawić nam swoje Słowo na piśmie.</p><p><b>Kluczowe teksty:</b> Wyjścia 17,14 · Jeremiasza 36,2</p><p><b>Do dyskusji:</b> Co zmienia się w Tobie, gdy wiesz, że Bóg chciał, by Jego przesłanie zostało spisane?</p><p><b>Zastosowanie:</b> Czytaj jeden fragment dziennie.</p>",k4:"Plan zajęć 30 min · Wkrótce",b5:"<p>⏱ <b>Plan na 30 minut</b></p><p>Wstęp i modlitwa · 3 min</p><p>Powtórka tematu · 7 min</p><p>Dyskusja · 12 min</p><p>Zastosowanie · 5 min</p><p>Zakończenie i modlitwa · 3 min</p>",k5:"Pieśń dnia · Wkrótce",b6:"<p>🎵 <b>Proponowana pieśń dnia</b></p><p>Wkrótce Berea podpowie, jaka pieśń ze śpiewnika pasuje do dzisiejszego tematu.</p>",
+u0:"Cześć",b0:"Cześć! Jestem Berea 🌅 Dziś studiujemy „Pisma prorocze”. Co chcesz zrobić?",
+b1:"<p>📖 <b>Podsumowanie</b></p><p>Bóg posłużył się bardzo różnymi ludźmi, by przekazać swoje słowo. Pisma prorocze dają nam pociechę i nadzieję.</p><span class='src'>Rzymian 15,4</span>",
+b2:"<p>❓ <b>Pytania do Twojej klasy</b></p><p>1. Jaka zapisana obietnica dała Ci nadzieję?</p><p>2. Dlaczego warto codziennie studiować Biblię?</p><p>3. Jak dzielisz się tą nadzieją?</p>",
+u3:"Czym jest dar proroctwa?",b3:"<p>To jeden z darów Ducha, by prowadzić i budować Kościół. Biblia jest normą, według której sprawdza się każde nauczanie.</p><span class='src'>Zasada wiary 18 · Joel 2,28</span>",
+howEye:"Jak to działa",howH:"Proste dla całego zboru.",s1h:"Otwórz Telegram",s1p:"Zainstaluj Telegram (bezpłatny). Potem zeskanuj kod QR aparatem albo znajdź @berea_leccion_bot.",s2h:"Studiuj z Berea",s2p:"Podsumowanie dnia, werset i proste wyjaśnienie, zawsze związane z lekcją kwartału.",s3h:"Pytaj o co chcesz",s3p:"Przygotuj pytania do klasy i pytaj o wszystko z Biblii, 28 zasad wiary i Ellen G. White. Dostępne po hiszpańsku, polsku i angielsku; wkrótce niemiecki.",
+faithEye:"Wierność Biblii",faithH:"Do studiowania z modlitwą i Biblią w ręku.",c1:"<b>Oparta na Biblii</b> i na 28 zasadach wiary.",c2:"<b>Z odnośnikami</b>, by każdy mógł sprawdzić, jak mieszkańcy Berei.",c3:"<b>Bez zmyślonych cytatów.</b> Gdy nie jest pewna, mówi o tym i prowadzi do lekcji.",c4:"<b>Wie, kiedy milczeć.</b> W sprawach osobistych zaleca rozmowę z pastorem lub starszymi.",
+roadEye:"Co dalej",roadH:"Rośniemy razem ze zborami.",r1w:"Grudzień 2026",r1h:"Darmowa beta",r1p:"Mała grupa testuje Berea i pomaga ją ulepszać.",r2w:"Styczeń 2027",r2h:"Darmowy okres próbny",r2p:"Wszystkie zainteresowane zbory, z nowym kwartałem.",r3w:"Luty 2027",r3h:"Plany dla zboru",r3p:"Proste ceny dla każdego zboru. Ogłosimy je z wyprzedzeniem.",
+joinH:"Wypróbuj dziś w Telegramie.",joinP:"Zeskanuj kod albo dotknij przycisku. Napisz „Cześć” i wybierz przycisk.",
+faqH:"Najczęstsze pytania",q1:"Czy to oficjalna usługa Kościoła Adwentystów?",a1:"Nie. Berea to niezależny projekt członków kościoła, by zachęcać do codziennego studiowania Biblii.",q2:"Czy zastępuje lekcję szkółki sobotniej?",a2:"Nie. Jej towarzyszy i zawsze prowadzi do pełnej lekcji.",q3:"Czy muszę coś instalować?",a3:"Tak, trzeba zainstalować Telegram, bezpłatny w telefonie. Potem zeskanuj kod QR z tej strony aparatem (albo dotknij przycisku), otworzy się czat z Berea i dotykasz przycisku.",q4:"Ile to kosztuje?",a4:"Beta i styczeń są za darmo. Ceny ogłosimy przed lutym.",
+disc:"Berea to niezależny projekt i nie jest oficjalną usługą Kościoła Adwentystów Dnia Siódmego."},
+en:{th5h:"Suggested hymn of the day",th5p:"The hymn from the hymnal that fits the lesson topic.",th6h:"Send to your class",th6p:"Send the summary and questions to your group with one tap.", teachEye:"For Sabbath School teachers",teachH:"Arrive at class with the lesson already prepared.",teachP:"Berea prepares the lesson for you: it summarizes it, explains it and gives you questions to lead the discussion. You are still the teacher; Berea saves you hours of preparation.",th1h:"Lesson summary",th1p:"The essentials of the topic, in plain words.",th2h:"Questions for your class",th2p:"To open the conversation and encourage participation.",th3h:"Explanation of the texts",th3p:"What the passage says and how it connects with the lesson.",th4h:"Full class plan",th4p:"Opening, discussion, application and prayer, in 30 or 45 minutes.",teachSoon:"Soon", busyEye:"We know you are busy",busyH:"You don't have time to read the whole lesson every day. Berea does.",busyP:"Berea is an artificial intelligence assistant that works like a patient teacher on your phone: it reads the lesson for you and tells it in plain words. It does not replace the full lesson or your pastor; it helps you get to it.",bz1h:"It explains it",bz1p:"The day's topic in plain language, with the verse and its reference.",bz2h:"It summarizes it",bz2p:"In a minute you know what it is about, even if you couldn't read it today.",bz3h:"It prepares the questions",bz3p:"To think about during the day or to bring to your Sabbath School class.", privL:"Privacy policy",termsL:"Terms of use",easyEye:"Jeremiah 6:16 · The ancient paths",easyH:"The same Bible, on today's phone.",easyP:"The ancient paths, with a modern tool. If you can send a message, you can use Berea: one button leads to the summary, another to the questions.",listen:"🔊 Listen with voice",bereEye:"Acts 17:11",bereH:"The Bereans studied every day.",bereP:"When Paul preached to them, they did not accept everything blindly: they searched the Scriptures daily to check it. That is where the name Berea comes from.",tag:"Adventist",eyebrow:"For Adventist churches",h1:"The whole Sabbath School lesson, in one button.",lead:"Berea explains the lesson in plain words, summarizes the day and prepares questions for your class. It also answers questions about the whole Bible, the 28 Beliefs and Ellen G. White. Open Telegram, tap a button, done.",cta:"Try Berea on Telegram",cta2:"See how it works",beta:"Free beta from December. Free in January too.",
+demoEye:"How it works",demoH:"One chat, buttons for everything, all your questions.",demoP:"This is an animated demonstration with answers like the ones Berea gives.",t1:"Tap “Summary of the lesson” and grasp the day's topic in a minute.",t2:"Tap “Questions for my class” and arrive prepared for Sabbath School. Teaching? Tap “Prepare my class”: summary, texts and questions, ready.",t3:"Ask about the lesson, and also about the whole Bible, the 28 Fundamental Beliefs and the writings of Ellen G. White, with references.",replay:"Watch again",demoNote:"Illustrative demonstration, not a live recording.",online:"lesson assistant",
+k1:"Summary of the lesson",k2:"Questions for my class",k3:"Prepare my class",b4:"<p>🧑‍🏫 <b>Your class, ready</b></p><p><b>Central idea:</b> God used different people to leave us His Word in writing.</p><p><b>Key texts:</b> Exodus 17:14 · Jeremiah 36:2</p><p><b>For discussion:</b> What changes in you when you know God wanted His message written down?</p><p><b>Apply:</b> Read one passage each day this week.</p>",k4:"Class plan 30 min · Soon",b5:"<p>⏱ <b>30-minute plan</b></p><p>Opening and prayer · 3 min</p><p>Topic review · 7 min</p><p>Discussion · 12 min</p><p>Application · 5 min</p><p>Closing and prayer · 3 min</p>",k5:"Hymn of the day · Soon",b6:"<p>🎵 <b>Suggested hymn of the day</b></p><p>Soon Berea will tell you which hymn from the hymnal fits today's topic.</p>",
+u0:"Hello",b0:"Hello! I'm Berea 🌅 Today we study “The Prophetic Writings”. What would you like to do?",
+b1:"<p>📖 <b>Summary</b></p><p>God used very different people to share his message. The prophetic writings bring us comfort and hope.</p><span class='src'>Romans 15:4</span>",
+b2:"<p>❓ <b>Questions for your class</b></p><p>1. Which written promise has given you hope?</p><p>2. Why study the Bible every day?</p><p>3. How do you share that hope?</p>",
+u3:"What is the gift of prophecy?",b3:"<p>It is one of the Spirit's gifts to guide and build up the church. The Bible is the standard that tests every teaching.</p><span class='src'>Fundamental Belief 18 · Joel 2:28</span>",
+howEye:"How it works",howH:"Simple for the whole church.",s1h:"Open Telegram",s1p:"Install Telegram (free). Then scan the QR code with your camera or find @berea_leccion_bot.",s2h:"Study with Berea",s2p:"Summary of the day, a verse and a plain explanation, always tied to the quarter's lesson.",s3h:"Ask anything",s3p:"Prepare your class questions and ask anything about the Bible, the 28 Beliefs and Ellen G. White. Available in Spanish, Polish and English; German soon.",
+faithEye:"Faithful to the Bible",faithH:"To study prayerfully, with the Bible in hand.",c1:"<b>Based on the Bible</b> and the 28 Fundamental Beliefs.",c2:"<b>With references</b> so everyone can check, like the Bereans.",c3:"<b>No invented quotes.</b> If it isn't sure, it says so and points you to the lesson.",c4:"<b>Knows when to stay silent.</b> On personal matters it recommends talking to the pastor or the elders.",
+roadEye:"What's next",roadH:"We grow with the churches.",r1w:"December 2026",r1h:"Free beta",r1p:"A small group tests Berea and helps improve it.",r2w:"January 2027",r2h:"Free trial",r2p:"Every interested church, with the new quarter.",r3w:"February 2027",r3h:"Plans per church",r3p:"Simple prices for each congregation, announced well in advance.",
+joinH:"Try it today on Telegram.",joinP:"Scan the code or tap the button. Say “Hello” and pick a button.",
+faqH:"Frequently asked questions",q1:"Is it an official service of the Adventist Church?",a1:"No. Berea is an independent project by church members to encourage daily Bible study.",q2:"Does it replace the Sabbath School lesson?",a2:"No. It accompanies it and always leads you to the full lesson.",q3:"Do I need to install anything?",a3:"Yes, you need to install Telegram, free on your phone. Then scan the QR code on this page with your camera (or tap the button), the chat with Berea opens and you tap a button.",q4:"How much does it cost?",a4:"The beta and January are free. Prices will be announced before February.",
+disc:"Berea is an independent project and is not an official service of the Seventh-day Adventist Church."},
+de:{th5h:"Liedvorschlag des Tages",th5p:"Das Lied aus dem Liederbuch, das zum Lektionsthema passt.",th6h:"An deine Klasse senden",th6p:"Sende Zusammenfassung und Fragen mit einem Tipp an deine Gruppe.", teachEye:"Für Sabbatschul-Lehrer",teachH:"Komm mit fertig vorbereiteter Lektion in deine Klasse.",teachP:"Berea bereitet die Lektion für dich vor: Sie fasst sie zusammen, erklärt sie und gibt dir Fragen für die Gesprächsleitung. Du bleibst der Lehrer; Berea spart dir Stunden an Vorbereitung.",th1h:"Zusammenfassung der Lektion",th1p:"Das Wesentliche des Themas in einfachen Worten.",th2h:"Fragen für deine Klasse",th2p:"Um das Gespräch zu eröffnen und zur Beteiligung anzuregen.",th3h:"Erklärung der Bibeltexte",th3p:"Was die Stelle sagt und wie sie zur Lektion passt.",th4h:"Kompletter Unterrichtsplan",th4p:"Einstieg, Gespräch, Anwendung und Gebet, in 30 oder 45 Minuten.",teachSoon:"Bald", busyEye:"Wir wissen, dass du beschäftigt bist",busyH:"Du hast keine Zeit, jeden Tag die ganze Lektion zu lesen. Berea schon.",busyP:"Berea ist ein KI-Assistent, der wie ein geduldiger Lehrer auf deinem Handy die Lektion für dich liest und sie in einfachen Worten erzählt. Er ersetzt weder die vollständige Lektion noch deinen Pastor, sondern hilft dir, zu ihr zu finden.",bz1h:"Er erklärt sie",bz1p:"Das Tagesthema in einfacher Sprache, mit Bibelvers und Stellenangabe.",bz2h:"Er fasst sie zusammen",bz2p:"In einer Minute weißt du, worum es geht, auch wenn du heute nicht lesen konntest.",bz3h:"Er bereitet die Fragen vor",bz3p:"Zum Nachdenken im Laufe des Tages oder für deine Sabbatschulklasse.", privL:"Datenschutz",termsL:"Nutzungsbedingungen",easyEye:"Jeremia 6,16 · Die alten Wege",easyH:"Dieselbe Bibel, auf dem Handy von heute.",easyP:"Die alten Wege, mit einem modernen Werkzeug. Wer eine Nachricht senden kann, kann Berea nutzen: Ein Button führt zur Zusammenfassung, einer zu den Fragen.",listen:"🔊 Mit Stimme anhören",bereEye:"Apostelgeschichte 17,11",bereH:"Die Beröer studierten jeden Tag.",bereP:"Als Paulus zu ihnen sprach, nahmen sie nicht alles ungeprüft an: Sie forschten täglich in den Schriften, um es zu prüfen. Daher kommt der Name Berea.",tag:"Adventistisch",eyebrow:"Für Adventgemeinden",h1:"Die ganze Sabbatschul-Lektion, in einem Button.",lead:"Berea erklärt die Lektion in einfachen Worten, fasst den Tag zusammen und bereitet Fragen für deine Klasse vor. Sie beantwortet auch Fragen zur ganzen Bibel, den 28 Glaubensüberzeugungen und Ellen G. White. Telegram öffnen, Button tippen, fertig.",cta:"Berea in Telegram testen",cta2:"So funktioniert es",beta:"Kostenlose Beta ab Dezember. Auch im Januar gratis.",
+demoEye:"So funktioniert es",demoH:"Ein Chat, Buttons für alles, alle deine Fragen.",demoP:"Das ist eine animierte Demonstration mit Antworten, wie Berea sie gibt.",t1:"Tippe „Zusammenfassung der Lektion“ und verstehe das Tagesthema in einer Minute.",t2:"Tippe „Fragen für meine Klasse“ und komm gut vorbereitet zur Sabbatschule. Du unterrichtest? Tippe „Meine Klasse vorbereiten“: Zusammenfassung, Texte und Fragen, fertig.",t3:"Frage zur Lektion und auch zur ganzen Bibel, den 28 Glaubensüberzeugungen und den Schriften von Ellen G. White, mit Bibelstellen.",replay:"Nochmal ansehen",demoNote:"Anschauliche Demonstration, keine Live-Aufnahme.",online:"Lektions-Assistent",
+k1:"Zusammenfassung der Lektion",k2:"Fragen für meine Klasse",k3:"Meine Klasse vorbereiten",b4:"<p>🧑‍🏫 <b>Deine Klasse, bereit</b></p><p><b>Kernidee:</b> Gott gebrauchte verschiedene Menschen, um uns sein Wort schriftlich zu hinterlassen.</p><p><b>Schlüsseltexte:</b> 2. Mose 17,14 · Jeremia 36,2</p><p><b>Zum Gespräch:</b> Was verändert sich in dir, wenn du weißt, dass Gott seine Botschaft aufgeschrieben haben wollte?</p><p><b>Anwenden:</b> Lies diese Woche jeden Tag eine Stelle.</p>",k4:"Unterrichtsplan 30 Min. · Bald",b5:"<p>⏱ <b>30-Minuten-Plan</b></p><p>Einstieg und Gebet · 3 Min.</p><p>Themenwiederholung · 7 Min.</p><p>Gespräch · 12 Min.</p><p>Anwendung · 5 Min.</p><p>Abschluss und Gebet · 3 Min.</p>",k5:"Lied des Tages · Bald",b6:"<p>🎵 <b>Liedvorschlag des Tages</b></p><p>Bald sagt dir Berea, welches Lied aus dem Liederbuch zum heutigen Thema passt.</p>",
+u0:"Hallo",b0:"Hallo! Ich bin Berea 🌅 Heute studieren wir „Die prophetischen Schriften“. Was möchtest du tun?",
+b1:"<p>📖 <b>Zusammenfassung</b></p><p>Gott hat ganz verschiedene Menschen gebraucht, um seine Botschaft weiterzugeben. Die prophetischen Schriften schenken uns Trost und Hoffnung.</p><span class='src'>Römer 15,4</span>",
+b2:"<p>❓ <b>Fragen für deine Klasse</b></p><p>1. Welche geschriebene Verheißung hat dir Hoffnung gegeben?</p><p>2. Warum täglich in der Bibel lesen?</p><p>3. Wie teilst du diese Hoffnung?</p>",
+u3:"Was ist die Gabe der Weissagung?",b3:"<p>Sie ist eine der Gaben des Geistes, um die Gemeinde zu leiten und zu erbauen. Die Bibel ist der Maßstab für jede Lehre.</p><span class='src'>Glaubensüberzeugung 18 · Joel 3,1</span>",
+howEye:"So funktioniert es",howH:"Einfach für die ganze Gemeinde.",s1h:"Telegram öffnen",s1p:"Installiere Telegram (kostenlos). Dann scanne den QR-Code mit der Kamera oder suche @berea_leccion_bot.",s2h:"Mit Berea studieren",s2p:"Tageszusammenfassung, Bibelvers und einfache Erklärung, immer passend zur Quartalslektion.",s3h:"Frag, was du willst",s3p:"Bereite Klassenfragen vor und frage alles zu Bibel, 28 Glaubensüberzeugungen und Ellen G. White. Verfügbar auf Spanisch, Polnisch und Englisch; Deutsch bald.",
+faithEye:"Treu zur Bibel",faithH:"Zum betenden Studium, die Bibel in der Hand.",c1:"<b>Auf der Bibel</b> und den 28 Glaubensüberzeugungen gegründet.",c2:"<b>Mit Bibelstellen</b>, damit jeder nachprüfen kann, wie die Beröer.",c3:"<b>Keine erfundenen Zitate.</b> Ist sie unsicher, sagt sie es und verweist auf die Lektion.",c4:"<b>Weiß, wann sie schweigt.</b> Bei persönlichen Fragen rät sie zum Gespräch mit Pastor oder Ältesten.",
+roadEye:"Was kommt",roadH:"Wir wachsen mit den Gemeinden.",r1w:"Dezember 2026",r1h:"Kostenlose Beta",r1p:"Eine kleine Gruppe testet Berea und hilft, sie zu verbessern.",r2w:"Januar 2027",r2h:"Kostenlose Testphase",r2p:"Alle interessierten Gemeinden, mit dem neuen Quartal.",r3w:"Februar 2027",r3h:"Pläne pro Gemeinde",r3p:"Einfache Preise für jede Gemeinde, rechtzeitig angekündigt.",
+joinH:"Teste es heute in Telegram.",joinP:"Scanne den Code oder tippe den Button. Schreib „Hallo“ und wähle einen Button.",
+faqH:"Häufige Fragen",q1:"Ist das ein offizieller Dienst der Adventgemeinde?",a1:"Nein. Berea ist ein unabhängiges Projekt von Gemeindegliedern zur Förderung des täglichen Bibelstudiums.",q2:"Ersetzt es die Sabbatschul-Lektion?",a2:"Nein. Es begleitet sie und führt immer zur vollständigen Lektion.",q3:"Muss ich etwas installieren?",a3:"Ja, du musst Telegram installieren, kostenlos auf deinem Handy. Dann scanne den QR-Code auf dieser Seite mit der Kamera (oder tippe den Button), der Chat mit Berea öffnet sich und du tippst einen Button.",q4:"Was kostet es?",a4:"Beta und Januar sind kostenlos. Preise werden vor Februar bekanntgegeben.",
+disc:"Berea ist ein unabhängiges Projekt und kein offizieller Dienst der Siebenten-Tags-Adventisten."}
+};
+var KEY="berea-lang-de",L="de",timer=0,run=0,aud=null,noLoop=false;
+function stopAud(){if(aud){try{aud.pause()}catch(e){}aud=null}noLoop=false}
+var feed=document.getElementById("feed"),k1=document.getElementById("k1"),k2=document.getElementById("k2"),k3=document.getElementById("k3"),k4=document.getElementById("k4"),k5=document.getElementById("k5"),cap=document.getElementById("cap");
+var still=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+if(location.search.indexOf("rec")>-1||location.hash==="#rec")document.documentElement.classList.add("rec");
+function sleep(ms){return new Promise(function(r){setTimeout(r,ms)})}
+function add(cls,html){var d=document.createElement("div");d.className="msg "+cls;d.innerHTML=html;feed.appendChild(d);while(feed.children.length>5)feed.removeChild(feed.firstChild);return d}
+function typing(){var d=document.createElement("div");d.className="msg bot typing";d.innerHTML="<i></i><i></i><i></i>";feed.appendChild(d);return d}
+function press(k){k.classList.add("hit");setTimeout(function(){k.classList.remove("hit")},500)}
+async function play(){
+  var id=++run,t=T[L];feed.innerHTML="";
+  function alive(){return id===run}
+  var steps=[
+   ["me",t.u0],["bot",t.b0],["key",k1,t.k1],["bot",t.b1],["key",k2,t.k2],["bot",t.b2],["key",k3,t.k3],["bot",t.b4],["key",k4,t.k4],["bot",t.b5],["key",k5,t.k5],["bot",t.b6],["me","<p>"+t.u3+"</p>"],["bot",t.b3]];
+  if(still){steps.forEach(function(s){if(s[0]==="me")add("me",s[1]);if(s[0]==="bot")add("bot",s[1])});return}
+  await sleep(500);
+  for(var i=0;i<steps.length;i++){
+    if(!alive())return;var s=steps[i];
+    if(s[0]==="me"){add("me",s[1]);await sleep(700)}
+    else if(s[0]==="key"){await sleep(900);press(s[1]);if(!alive())return;add("me","<p>"+s[2]+"</p>");await sleep(500)}
+    else{var ty=typing();await sleep(1100);if(ty.parentNode)ty.parentNode.removeChild(ty);if(!alive())return;add("bot",s[1]);await sleep(i===13?0:s[1].length>200?3600:2200)}
+  }
+  if(!alive())return;await sleep(4000);if(alive()&&!window.__norep&&!noLoop)play();
+}
+function apply(l){
+  stopAud();L=l;var t=T[l],r=document.documentElement;r.lang=l;
+  document.querySelectorAll("[data-t]").forEach(function(e){e.innerHTML=t[e.getAttribute("data-t")]});
+  k1.textContent=t.k1;k2.textContent=t.k2;k3.textContent=t.k3;k4.textContent=t.k4;k5.textContent=t.k5;cap.textContent=t.demoH;
+  document.querySelectorAll(".langsw button").forEach(function(b){b.setAttribute("aria-pressed",b.getAttribute("data-set")===l?"true":"false")});
+  try{localStorage.setItem(KEY,l)}catch(e){}
+  play();
+}
+var cur="de";
+try{var s=localStorage.getItem(KEY);if(T[s])cur=s}catch(e){}
+document.querySelectorAll(".langsw button").forEach(function(b){b.addEventListener("click",function(){apply(b.getAttribute("data-set"))})});
+document.getElementById("replay").addEventListener("click",function(){stopAud();play()});
+document.getElementById("listen").addEventListener("click",function(){stopAud();noLoop=true;try{aud=new Audio("../audio/narr_"+L+".mp3");aud.play().catch(function(){})}catch(e){}play()});
+apply(cur);
+})();
+</script>
