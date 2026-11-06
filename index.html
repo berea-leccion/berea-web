@@ -442,7 +442,7 @@ async function play(){
   if(!alive())return;await sleep(4000);if(alive()&&!window.__norep&&!noLoop)play();
 }
 function apply(l){
-  stopAud();L=l;var t=T[l],r=document.documentElement;r.lang=l;
+  stopAud();L=l;var t=T[l],r=document.documentElement;r.lang=l;document.querySelectorAll('a[href^="https://t.me/berea_contacto_bot"]').forEach(function(x){x.href="https://t.me/berea_contacto_bot?start="+l});
   document.querySelectorAll("[data-t]").forEach(function(e){e.innerHTML=t[e.getAttribute("data-t")]});
   k1.textContent=t.k1;k2.textContent=t.k2;k3.textContent=t.k3;k4.textContent=t.k4;k5.textContent=t.k5;cap.textContent=t.demoH;
   document.querySelectorAll(".langsw button").forEach(function(b){b.setAttribute("aria-pressed",b.getAttribute("data-set")===l?"true":"false")});
