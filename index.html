@@ -219,7 +219,7 @@ footer .wrap{padding-block:28px;font-size:.88rem;color:var(--muted);display:flex
     <h1 data-t="h1"></h1>
     <p class="lead" data-t="lead"></p>
     <div class="btns">
-      <a class="btn go" href="https://t.me/berea_contacto_bot" target="_blank" rel="noopener" data-t="cta"></a>
+      <a class="btn go" href="https://t.me/berea_contacto_bot?start=pl_pl" target="_blank" rel="noopener" data-t="cta"></a>
       <a class="btn ghost" href="#demo" data-t="cta2"></a>
     </div>
     <p class="beta" data-t="beta"></p>
@@ -281,7 +281,7 @@ footer .wrap{padding-block:28px;font-size:.88rem;color:var(--muted);display:flex
 
 <section class="teach">
   <div class="teach-in">
-    <div class="teach-l"><p class="eyebrow" data-t="teachEye"></p><h2 data-t="teachH"></h2><p data-t="teachP"></p><a class="btn go" href="https://t.me/berea_contacto_bot" target="_blank" rel="noopener" data-t="cta"></a></div>
+    <div class="teach-l"><p class="eyebrow" data-t="teachEye"></p><h2 data-t="teachH"></h2><p data-t="teachP"></p><a class="btn go" href="https://t.me/berea_contacto_bot?start=pl_pl" target="_blank" rel="noopener" data-t="cta"></a></div>
     <ul class="teach-r">
       <li><b data-t="th1h"></b><span data-t="th1p"></span></li>
       <li><b data-t="th2h"></b><span data-t="th2p"></span></li>
@@ -328,7 +328,7 @@ footer .wrap{padding-block:28px;font-size:.88rem;color:var(--muted);display:flex
     <p class="eyebrow" data-t="easyEye"></p>
     <h2 data-t="easyH"></h2>
     <p data-t="easyP"></p>
-    <a class="btn go" href="https://t.me/berea_contacto_bot" target="_blank" rel="noopener" data-t="cta"></a>
+    <a class="btn go" href="https://t.me/berea_contacto_bot?start=pl_pl" target="_blank" rel="noopener" data-t="cta"></a>
   </div>
 </section>
 
@@ -348,7 +348,7 @@ footer .wrap{padding-block:28px;font-size:.88rem;color:var(--muted);display:flex
       <h2 data-t="joinH"></h2>
       <p data-t="joinP"></p>
       <div class="close-row">
-        <a class="btn go" href="https://t.me/berea_contacto_bot" target="_blank" rel="noopener" data-t="cta"></a>
+        <a class="btn go" href="https://t.me/berea_contacto_bot?start=pl_pl" target="_blank" rel="noopener" data-t="cta"></a>
       </div>
       <p class="mail-alt"><span data-t="mailAlt"></span>: <a href="mailto:berea.leccion@gmail.com?subject=Berea%2020%20dias">berea.leccion@gmail.com</a></p>
     </div>
@@ -442,7 +442,7 @@ async function play(){
   if(!alive())return;await sleep(4000);if(alive()&&!window.__norep&&!noLoop)play();
 }
 function apply(l){
-  stopAud();L=l;var t=T[l],r=document.documentElement;r.lang=l;document.querySelectorAll('a[href^="https://t.me/berea_contacto_bot"]').forEach(function(x){x.href="https://t.me/berea_contacto_bot?start="+l});
+  stopAud();L=l;var t=T[l],r=document.documentElement;r.lang=l;document.querySelectorAll('a[href^="https://t.me/berea_contacto_bot"]').forEach(function(x){x.href="https://t.me/berea_contacto_bot?start="+l+"_pl"});
   document.querySelectorAll("[data-t]").forEach(function(e){e.innerHTML=t[e.getAttribute("data-t")]});
   k1.textContent=t.k1;k2.textContent=t.k2;k3.textContent=t.k3;k4.textContent=t.k4;k5.textContent=t.k5;cap.textContent=t.demoH;
   document.querySelectorAll(".langsw button").forEach(function(b){b.setAttribute("aria-pressed",b.getAttribute("data-set")===l?"true":"false")});
